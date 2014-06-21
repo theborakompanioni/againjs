@@ -32,6 +32,20 @@ describe('Again', function() {
             expect(id).toEqual(1000);
         });
 
+        it('should return the current state', function () {
+            again.update('state1');
+
+            var state = again.state();
+
+            expect(state).toEqual('state1');
+        });
+
+        it('should return false when stopping unknown handlers', function () {
+            var stopped = again.stop(1000);
+
+            expect(stopped).toBe(false);
+        });
+
         describe('Again.every() async', function() {
             var update = noop;
             var update2 = noop;

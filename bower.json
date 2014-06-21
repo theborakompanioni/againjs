@@ -3,6 +3,7 @@
   "version": "0.0.9",
   "ignore": [
     "test",
+    "bin",
     "spec",
     "src",
     "bower_components",
