@@ -2,16 +2,18 @@
   "name": "againjs",
   "version": "0.0.9",
   "ignore": [
-    "bower_components",
     "test",
     "spec",
     "src",
+    "bower_components",
     "node_modules",
     "Gruntfile.js",
     "SpecRunner.html",
     "package.json",
     "bower.json",
     ".travis.yml",
+    ".jshintrc",
+    ".editorconfig",
     ".gitignore"
   ],
   "dependencies": {
