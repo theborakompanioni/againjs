@@ -2,6 +2,7 @@ again.js
 ========
 
 [![Build Status](https://travis-ci.org/theborakompanioni/againjs.svg?branch=master)](https://travis-ci.org/theborakompanioni/againjs)
+[![Dependency Status](http://img.shields.io/badge/dependencies-Vanilla_JS-brightgreen.svg)](http://vanilla-js.com/)
 [![devDependency Status](https://david-dm.org/theborakompanioni/againjs/dev-status.svg)](https://david-dm.org/theborakompanioni/againjs#info=devDependencies)
 
 A "poll-me-maybe" JavaScript library
