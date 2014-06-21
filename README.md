@@ -1,8 +1,9 @@
 again.js
-===
+========
+
+[![Build Status](https://travis-ci.org/theborakompanioni/againjs.svg?branch=master)](https://travis-ci.org/theborakompanioni/againjs)
 
 A "poll-me-maybe" JavaScript library
-
 
 ### How to use
 
