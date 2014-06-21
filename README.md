@@ -2,6 +2,8 @@ again.js
 ========
 
 [![Build Status](https://travis-ci.org/theborakompanioni/againjs.svg?branch=master)](https://travis-ci.org/theborakompanioni/againjs)
+[![Dependency Status](https://david-dm.org/theborakompanioni/againjs.svg)](https://david-dm.org/theborakompanioni/againjs)
+[![devDependency Status](https://david-dm.org/theborakompanioni/againjs/dev-status.svg)](https://david-dm.org/theborakompanioni/againjs#info=devDependencies)
 
 A "poll-me-maybe" JavaScript library
 
@@ -39,6 +41,8 @@ setTimeout(function() {
 13000: hidden
 18000: hidden
 21000: visible
+22000: visible
+23000: visible
 ...
 ```
 

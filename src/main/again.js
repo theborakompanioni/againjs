@@ -71,6 +71,9 @@
         return id;
     };
 
+    /**
+    * cancel and remove handler registered with `every` method
+    */
     Again.prototype.stop = function(id) {
         if ( !this._$$timers[id] ) {
             return false;
