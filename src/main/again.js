@@ -12,7 +12,7 @@
     function run(timer, interval, runNow) {
         var runner = function () {
             timer.last = new Date();
-            timer.callback.call(window);
+            timer.callback();
         };
 
         if ( runNow ) {
@@ -91,6 +91,8 @@
 
     Again.prototype._run = function(id, runNow) {
         var timer = this._$$timers[id];
+
+        // interval is NaN if no state or no corresponding interval
         var interval = +timer.intervals[this._$$state];
 
         if(interval > 0) {

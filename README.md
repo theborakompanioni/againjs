@@ -9,11 +9,36 @@ A "poll-me-maybe" JavaScript library
 
 ```javascript
 var again = Again.create({
-
+    ...
 });
 
-var config = { ... };
-again.every(function() { ... }, config);
+again.every(function() { 
+    console.log(again.state());
+}, {
+    'visible': 1000,
+    'hidden' : 5000
+});
+
+again.update('visible');
+
+setTimeout(function() {
+    again.update('hidden');
+}, 3000);
+
+setTimeout(function() {
+    again.update('visible');
+}, 20000);
+```
+
+```
+1000 : visible
+2000 : visible
+3000 : visible
+8000 : hidden
+13000: hidden
+18000: hidden
+21000: visible
+...
 ```
 
 ### License
