@@ -86,7 +86,7 @@ module.exports = function(grunt) {
         },
         coveralls: {
             options: {
-                src: '<%= dirs.coverage %>/lcov/lcov.info'
+                force:true
             },
             target: {
                 src: '<%= dirs.coverage %>/lcov/lcov.info'
