@@ -1,0 +1,22 @@
+{
+  "name": "againjs",
+  "version": "0.0.9",
+  "ignore": [
+    "bower_components",
+    "test",
+    "spec",
+    "src",
+    "node_modules",
+    "Gruntfile.js",
+    "SpecRunner.html",
+    "package.json",
+    "bower.json",
+    ".travis.yml",
+    ".gitignore"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+    "jasmine": "2.0.0"
+  }
+}
