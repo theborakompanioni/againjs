@@ -1,6 +1,9 @@
 {
   "name": "againjs",
   "version": "0.0.9",
+  "main": [
+      "./dist/again.min.js"
+  ],
   "ignore": [
     "test",
     "bin",
@@ -12,6 +15,7 @@
     "SpecRunner.html",
     "package.json",
     "bower.json",
+    ".coveralls.yml",
     ".travis.yml",
     ".jshintrc",
     ".editorconfig",
