@@ -9,6 +9,9 @@
     "url": "http://example.org",
     "email": "theborakompanioni+github@gmail.com"
   },
+  "scripts": {
+      "test": "grunt default --verbose"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/theborakompanioni/againjs.git"
