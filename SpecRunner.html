@@ -4,24 +4,24 @@
 <head>
   <title>Jasmine Spec Runner</title>
 
-  <link rel="shortcut icon" type="image/png" href="lib/jasmine/lib/jasmine-core/jasmine_favicon.png">
-  <link rel="stylesheet" type="text/css" href="lib/jasmine/lib/jasmine-core/jasmine.css">
-  <script type="text/javascript" src="lib/jasmine/lib/jasmine-core/jasmine.js"></script>
-  <script type="text/javascript" src="lib/jasmine/lib/jasmine-core/jasmine-html.js"></script>
-  <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+  <link rel="shortcut icon" type="image/png" href="bower_components/jasmine/lib/jasmine-core/jasmine_favicon.png">
+  <link rel="stylesheet" type="text/css" href="bower_components/jasmine/lib/jasmine-core/jasmine.css">
+  <script type="text/javascript" src="bower_components/jasmine/lib/jasmine-core/jasmine.js"></script>
+  <script type="text/javascript" src="bower_components/jasmine/lib/jasmine-core/jasmine-html.js"></script>
+    <script type="text/javascript" src="bower_components/jasmine/lib/jasmine-core/boot/boot.js"></script>
 
   <!-- include source files here... -->
-  <script type="text/javascript" src="dist/yourLibrary.min.js"></script>
+  <script type="text/javascript" src="dist/again.min.js"></script>
 
   <!-- include spec files here... -->
-  <script type="text/javascript" src="spec/yourLibrarySpec.js"></script>
+  <script type="text/javascript" src="spec/againSpec.js"></script>
 
   <script type="text/javascript">
     (function() {
       var jasmineEnv = jasmine.getEnv();
       jasmineEnv.updateInterval = 1000;
 
-      var htmlReporter = new jasmine.HtmlReporter();
+      var htmlReporter = new jasmine.HtmlReporter({});
 
       jasmineEnv.addReporter(htmlReporter);
 

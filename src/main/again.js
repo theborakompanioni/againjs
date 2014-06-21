@@ -1,6 +1,6 @@
 ;(function(window, undefined) {
     'use strict';
-    var version = '0.1.0';
+    var version = '0.0.9';
 
     function cancel(timer) {
         clearInterval(timer.id);
