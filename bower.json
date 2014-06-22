@@ -24,6 +24,6 @@
   "dependencies": {
   },
   "devDependencies": {
-    "jasmine": "2.0.0"
+    "jasmine": "pivotal/jasmine#master"
   }
 }

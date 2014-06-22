@@ -1,8 +1,13 @@
-/*global Again,describe,it,expect,jasmine,beforeEach,afterEach*/
+/*global Again,jasmine,describe,it,expect,beforeEach,afterEach*/
 describe('Again', function() {
     'use strict';
 
     var noop = function() { /*empty*/ };
+
+    // TODO: uncomment this if jasmine supports mocking the Date object natively
+    //it('should verify that jasmine mocks the Date object', function () {
+    //    expect(jasmine.clock().mockDate).toBeDefined();
+    //});
 
     it('should get the version of Again', function () {
         expect(Again.version).toBe('0.0.9');
@@ -55,7 +60,10 @@ describe('Again', function() {
                 update = jasmine.createSpy('update');
                 update2 = jasmine.createSpy('update2');
                 update3 = jasmine.createSpy('update3');
+
                 jasmine.clock().install();
+
+                //jasmine.clock().mockDate();
             });
 
             afterEach(function() {
@@ -248,6 +256,129 @@ describe('Again', function() {
 
         });
 
+
     });
 
+
+    describe('Again.every() reinitializeOn', function() {
+        var again;
+        var update = noop;
+        var update2 = noop;
+        var update3 = noop;
+
+        beforeEach(function() {
+            again = Again.create({
+                reinitializeOn: {
+                    '10': false,
+                    '20': true
+                }
+            });
+            update = jasmine.createSpy('update');
+            update2 = jasmine.createSpy('update2');
+            update3 = jasmine.createSpy('update3');
+
+            jasmine.clock().install();
+
+            //jasmine.clock().mockDate();
+        });
+
+        afterEach(function() {
+            jasmine.clock().uninstall();
+        });
+
+        it('should reinitialize immediately on state change (3 states)', function () {
+            var id = again.every(update, {
+                '10': 10,
+                '20': 20
+            });
+
+            var id2 = again.every(update2, {
+                '10': 10
+            });
+
+            var id3 = again.every(update3, {
+                '20': 20
+            });
+
+            again.update('10');
+
+            expect(update).not.toHaveBeenCalled();
+            expect(update2).not.toHaveBeenCalled();
+            expect(update3).not.toHaveBeenCalled();
+
+            jasmine.clock().tick(11);
+
+            expect(update.calls.count()).toEqual(1);
+            expect(update2.calls.count()).toEqual(1);
+            expect(update3.calls.count()).toEqual(0);
+
+            again.update('20');
+
+            expect(update.calls.count()).toEqual(2);
+            expect(update2.calls.count()).toEqual(1);
+            expect(update3.calls.count()).toEqual(1);
+
+            jasmine.clock().tick(11);
+
+            expect(update.calls.count()).toEqual(2);
+            expect(update2.calls.count()).toEqual(1);
+            expect(update3.calls.count()).toEqual(1);
+
+            jasmine.clock().tick(11);
+
+            expect(update.calls.count()).toEqual(3);
+            expect(update2.calls.count()).toEqual(1);
+            expect(update3.calls.count()).toEqual(2);
+
+            var allStopped = again.stop(id) && again.stop(id2) && again.stop(id3);
+
+            expect(allStopped).toBe(true);
+
+        });
+
+        /*it('should reinitialize immediately on state change (3 states)', function () {
+
+            var id = again.every(update, {
+                '10': 10,
+                '20': 20
+            });
+            again.update('10');
+
+            // nothing should be invoked
+            expect(update).not.toHaveBeenCalled();
+
+            jasmine.clock().tick(11); // now state '10' should have been invoked
+
+            console.log(jasmine.clock().tick(1));
+
+            expect(update.calls.count()).toEqual(1);
+
+            jasmine.clock().tick(5);
+
+            again.update('20'); // should run immediately
+
+            expect(update.calls.count()).toEqual(2);
+
+            jasmine.clock().tick(11);
+
+            again.update('10');
+
+            expect(update.calls.count()).toEqual(2);
+
+            jasmine.clock().tick(5); // nothing should run in the meantime
+
+            expect(update.calls.count()).toEqual(2);
+
+            again.update('20'); // should NOT run because the last run was only 16ms ago
+
+            expect(update.calls.count()).toEqual(2);
+            jasmine.clock().tick(6); // now '20' should have been invoked
+
+            expect(update.calls.count()).toEqual(3);
+
+            var stopped = again.stop(id);
+
+            expect(stopped).toBe(true);
+        });*/
+    });
 });

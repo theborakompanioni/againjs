@@ -2,6 +2,15 @@
     'use strict';
     var version = '0.0.9';
 
+    // polyfill for Date.now()
+    // @href https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now
+    if (!Date.now) {
+       Date.now = function now() {
+         return new Date().getTime();
+       };
+    }
+
+
     function cancel(timer) {
         clearInterval(timer.id);
         clearTimeout(timer.delay);
@@ -9,15 +18,17 @@
         delete timer.delay;
     }
 
-    function run(timer, interval, runNow) {
+    function run(timer, interval, state, runNow) {
         var runner = function () {
-            timer.last = new Date();
+            timer.last[state] = Date.now(); //new Date();
             timer.callback();
         };
 
+        timer.last = timer.last || {};
+
         if ( runNow ) {
-            var now  = new Date();
-            var last = now - timer.last;
+            var now  = Date.now(); //new Date();
+            var last = now - timer.last[state];
 
             if ( interval > last ) {
                 timer.delay = setTimeout(function () {
@@ -45,7 +56,7 @@
 
         me._$$state = null;
         
-        this._$$config.reinitializeImmediatelyOn = this._$$config.reinitializeImmediatelyOn || {};
+        this._$$config.reinitializeOn = this._$$config.reinitializeOn || {};
     }
 
     Again.prototype.state = function() {
@@ -99,12 +110,12 @@
         var interval = +timer.intervals[this._$$state];
 
         if(interval > 0) {
-            run(timer, interval, !!runNow);
+            run(timer, interval, this._$$state, !!runNow);
         }
     };
 
     Again.prototype._cancelAndReinitialize = function() {
-        var runNow = !!this._$$config.reinitializeImmediatelyOn[this._$$state];
+        var runNow = !!this._$$config.reinitializeOn[this._$$state];
 
         for (var id in this._$$timers) {
             if(this._$$timers.hasOwnProperty(id)) {
