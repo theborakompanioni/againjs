@@ -130,7 +130,7 @@ describe('Again', function() {
             it('should call corresponding handler on state change (2 states)', function () {
                 var id = again.every(update, {
                     '10': 10,
-                    '20': 20
+                    '*': 20
                 });
 
                 var id2 = again.every(update2, {

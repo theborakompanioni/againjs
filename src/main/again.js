@@ -72,6 +72,15 @@
         this._$$lastTimerId += 1;
         var id = this._$$lastTimerId;
 
+        var intervals = stateIntervals;
+
+        // handle every(function() { ... }, 1000)
+        if(parseFloat(stateIntervals) === stateIntervals) {
+            intervals = {
+                '*': parseFloat(stateIntervals)
+            };
+        }
+
         this._$$timers[id] = {
             callback: callback,
             intervals: stateIntervals
@@ -107,7 +116,7 @@
         var timer = this._$$timers[id];
 
         // interval is NaN if no state or no corresponding interval
-        var interval = +timer.intervals[this._$$state];
+        var interval = +timer.intervals[this._$$state] || +timer.intervals['*'];
 
         if(interval > 0) {
             run(timer, interval, this._$$state, !!runNow);
