@@ -104,6 +104,56 @@ describe('Again', function() {
                 expect(update.calls.count()).toEqual(2);
             });
 
+            it('should invoke handler via special "*" event', function () {
+                again.every(update, {
+                    '*': 100
+                });
+
+                again.update('state1');
+
+                expect(update).not.toHaveBeenCalled();
+
+                jasmine.clock().tick(101);
+
+                expect(update.calls.count()).toEqual(1);
+
+                again.update('state2');
+
+                jasmine.clock().tick(101);
+
+                expect(update.calls.count()).toEqual(2);
+            });
+
+            it('should invoke handler via special "*" event with number as stateIntervals param', function () {
+                again.every(update, 100);
+
+                again.update('state1');
+
+                expect(update).not.toHaveBeenCalled();
+
+                jasmine.clock().tick(101);
+
+                expect(update.calls.count()).toEqual(1);
+
+                again.update('state2');
+
+                jasmine.clock().tick(101);
+
+                expect(update.calls.count()).toEqual(2);
+            });
+
+            it('should invoke handler via special "*" event and invoke immediately', function () {
+                again.every(update, 100, true);
+
+                again.update('100');
+
+                expect(update.calls.count()).toEqual(1);
+
+                jasmine.clock().tick(101);
+
+                expect(update.calls.count()).toEqual(2);
+            });
+
             it('should deregister handler correctly', function () {
                 var id = again.every(update, {
                     '10': 10
@@ -124,7 +174,6 @@ describe('Again', function() {
                 jasmine.clock().tick(1001);
 
                 expect(update.calls.count()).toEqual(100);
-
             });
 
             it('should call corresponding handler on state change (2 states)', function () {

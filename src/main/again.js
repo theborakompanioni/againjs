@@ -83,7 +83,7 @@
 
         this._$$timers[id] = {
             callback: callback,
-            intervals: stateIntervals
+            intervals: intervals
         };
 
         this._run(id, !!runNow);
