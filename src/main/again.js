@@ -68,7 +68,7 @@
         this._cancelAndReinitialize();
     };
 
-    Again.prototype.every = function (callback, stateIntervals) {
+    Again.prototype.every = function (callback, stateIntervals, runNow) {
         this._$$lastTimerId += 1;
         var id = this._$$lastTimerId;
 
@@ -86,7 +86,7 @@
             intervals: stateIntervals
         };
 
-        this._run(id, false);
+        this._run(id, !!runNow);
 
         return id;
     };
