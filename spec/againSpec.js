@@ -15,10 +15,12 @@ describe('Again', function() {
 
     it('should create valid Again instances', function () {
         var again1 = Again.create({});
-        var again2 = new Again.create({});
+        var again2 = new Again({});
+        var again3 = new Again.create({});
 
         expect(again1).toBeDefined();
         expect(again2).toBeDefined();
+        expect(again3).toBeDefined();
     });
 
     describe('Again.every()', function() {

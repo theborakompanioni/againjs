@@ -46,6 +46,10 @@
     /*--------------------------------------------------------------------------*/
 
     function Again(config) {
+        if (!(this instanceof Again)) {
+            return new Again(config);
+        }
+
         this._$$initialized = false;
         this._$$state = null;
         this._$$lastTimerId = -1;
@@ -129,10 +133,7 @@
         }
     };
 
-    window.Again = function(config) {
-        return new Again(config || {});
-    };
-
+    window.Again = Again;
     window.Again.version = version;
     window.Again.create = window.Again;
 
