@@ -13,10 +13,12 @@ describe('Again', function() {
         expect(Again.version).toBe('0.0.9');
     });
 
-    it('should create an Again instance', function () {
-        var again = Again.create({});
+    it('should create valid Again instances', function () {
+        var again1 = Again.create({});
+        var again2 = new Again.create({});
 
-        expect(again).toBeDefined();
+        expect(again1).toBeDefined();
+        expect(again2).toBeDefined();
     });
 
     describe('Again.every()', function() {
@@ -35,6 +37,13 @@ describe('Again', function() {
             again.stopAll();
 
             expect(id).toEqual(1000);
+        });
+
+
+        it('should return null if no state is set', function () {
+            var state = again.state();
+
+            expect(state).toBeNull();
         });
 
         it('should return the current state', function () {
@@ -71,7 +80,7 @@ describe('Again', function() {
             });
 
             it('should attach and remove a handler', function () {
-                var id = again.every(update, {});
+                var id = again.every(noop, {});
                 var stopped = again.stop(id);
 
                 expect(stopped).toBe(true);
@@ -147,6 +156,8 @@ describe('Again', function() {
 
                 again.update('100');
 
+                jasmine.clock().tick(1);
+
                 expect(update.calls.count()).toEqual(1);
 
                 jasmine.clock().tick(101);
@@ -189,6 +200,7 @@ describe('Again', function() {
                 var id3 = again.every(update3, {
                     '20': 20
                 });
+
                 again.update('10');
 
                 expect(update).not.toHaveBeenCalled();
@@ -308,7 +320,6 @@ describe('Again', function() {
 
     });
 
-
     describe('Again.every() reinitializeOn', function() {
         var again;
         var update = noop;
@@ -335,7 +346,7 @@ describe('Again', function() {
             jasmine.clock().uninstall();
         });
 
-        it('should reinitialize immediately on state change (3 states)', function () {
+        it('should reinitialize "immediately" on state change (3 states)', function () {
             var id = again.every(update, {
                 '10': 10,
                 '20': 20
@@ -362,6 +373,8 @@ describe('Again', function() {
             expect(update3.calls.count()).toEqual(0);
 
             again.update('20');
+
+            jasmine.clock().tick(1);
 
             expect(update.calls.count()).toEqual(2);
             expect(update2.calls.count()).toEqual(1);
@@ -404,7 +417,9 @@ describe('Again', function() {
 
             jasmine.clock().tick(5);
 
-            again.update('20'); // should run immediately
+            again.update('20'); // should run "immediately"
+
+            jasmine.clock().tick(1);
 
             expect(update.calls.count()).toEqual(2);
 

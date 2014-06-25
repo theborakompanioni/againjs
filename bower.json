@@ -5,7 +5,6 @@
       "./dist/again.min.js"
   ],
   "ignore": [
-    "test",
     "bin",
     "spec",
     "src",
@@ -15,11 +14,7 @@
     "SpecRunner.html",
     "package.json",
     "bower.json",
-    ".coveralls.yml",
-    ".travis.yml",
-    ".jshintrc",
-    ".editorconfig",
-    ".gitignore"
+    "**/.*"
   ],
   "dependencies": {
   },

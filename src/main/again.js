@@ -5,7 +5,7 @@
     // polyfill for Date.now()
     // @href https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now
     if (!Date.now) {
-       Date.now = function now() {
+       Date.now = function() {
          return new Date().getTime();
        };
     }
@@ -36,10 +36,9 @@
                     timer.id = setInterval(runner, interval);
                 }, interval - last);
             } else {
-                runner();
+                setTimeout(function() { runner(); }, 0);
                 timer.id = setInterval(runner, interval);
             }
-
         } else {
           timer.id = setInterval(runner, interval);
         }
@@ -47,15 +46,11 @@
     /*--------------------------------------------------------------------------*/
 
     function Again(config) {
-        var me = this;
-
-        me._$$lastTimerId = -1;
-        me._$$timers = {};
-        me._$$initialized = false;
-        me._$$config = config || {};
-
-        me._$$state = null;
-        
+        this._$$initialized = false;
+        this._$$state = null;
+        this._$$lastTimerId = -1;
+        this._$$timers = {};
+        this._$$config = config || {};
         this._$$config.reinitializeOn = this._$$config.reinitializeOn || {};
     }
 
