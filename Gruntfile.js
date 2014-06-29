@@ -101,11 +101,14 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-coveralls');
-    grunt.loadNpmTasks('grunt-notify');
+    require('time-grunt')(grunt);
+
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
+
+    grunt.loadNpmTasks('grunt-coveralls');
+    grunt.loadNpmTasks('grunt-notify');
 
     grunt.registerTask( 'test', [ 'jasmine', 'coveralls']);
     grunt.registerTask( 'default', [ 'jshint', 'test', 'uglify', 'notify:js' ]);
