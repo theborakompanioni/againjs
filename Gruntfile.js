@@ -4,7 +4,6 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
 
-        // Define Directory
         dirs: {
             js:     'src/main',
             build:  'dist',
@@ -108,10 +107,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
 
-    // Register Taks
-    // --------------------------
-
-    // Observe changes, concatenate, minify and validate files
     grunt.registerTask( 'test', [ 'jasmine', 'coveralls']);
     grunt.registerTask( 'default', [ 'jshint', 'test', 'uglify', 'notify:js' ]);
 
