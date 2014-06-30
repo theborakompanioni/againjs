@@ -8,8 +8,21 @@ again.js
 
 A "poll-me-maybe" JavaScript library
 
-### How to use
+### Get Started
 
+Install dependencies
+
+`sudo npm install && bower install`
+
+Build Project
+
+`grunt`
+
+Run Tests
+
+Open `SpecRunner.html` in your browser and test with jasmine
+
+### How to use
 
 ```javascript
 var again = Again.create({
