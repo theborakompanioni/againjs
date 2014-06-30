@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Again.js <http://example.com/>
+ * Copyright 2014 tbk <theborakompanioni+againjs@gmail.com>
+ * Available under MIT license <http://opensource.org/licenses/MIT>
+ */
 ;(function(window, undefined) {
     'use strict';
     var version = '0.0.10';
