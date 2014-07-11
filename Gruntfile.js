@@ -39,7 +39,7 @@ module.exports = function(grunt) {
             },
             dist: {
               files: {
-                  '<%= dirs.build %>/again.min.js': '<%= dirs.js %>/again.js'
+                  '<%= dirs.build %>/<%= pkg.name %>.min.js': '<%= dirs.js %>/<%= pkg.name %>.js'
               }
             }
         },
@@ -90,7 +90,7 @@ module.exports = function(grunt) {
         },
         coveralls: {
             options: {
-                force:true
+                force: true
             },
             target: {
                 src: '<%= dirs.coverage %>/lcov/lcov.info'
@@ -117,7 +117,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-coveralls');
     grunt.loadNpmTasks('grunt-notify');
 
-    grunt.registerTask( 'test', [ 'jasmine', 'coveralls']);
-    grunt.registerTask( 'default', [ 'jshint', 'test', /*'karma' <- karma must be updated to 2.0,*/ 'uglify', 'notify:js' ]);
+    grunt.registerTask( 'test', ['karma', 'jasmine', 'coveralls']);
+    grunt.registerTask( 'default', [ 'jshint', 'test', 'uglify', 'notify:js' ]);
 
 };

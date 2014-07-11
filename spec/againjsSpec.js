@@ -10,7 +10,7 @@ describe('Again', function() {
     //});
 
     it('should get the version of Again', function () {
-        expect(Again.version).toBe('0.0.10');
+        expect(Again.version).toBe('0.0.11');
     });
 
     it('should create valid Again instances', function () {

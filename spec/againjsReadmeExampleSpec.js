@@ -17,10 +17,6 @@ describe('Again README example', function() {
         jasmine.clock().uninstall();
     });
 
-    it('should get the version of Again', function () {
-        expect(Again.version).toBe('0.0.10');
-    });
-
     /*
     console output should equal
     1000 : visible

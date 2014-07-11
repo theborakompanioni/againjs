@@ -6,7 +6,7 @@
  */
 ;(function(window, undefined) {
     'use strict';
-    var version = '0.0.10';
+    var version = '0.0.11';
 
     // polyfill for Date.now()
     // @href https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now
