@@ -30,6 +30,9 @@ module.exports = function(grunt) {
             },
             jasmine: {
                 src: ['spec/**/*.js']
+            },
+            karma: {
+                src: ['karma.conf.js']
             }
         },
         uglify: {
