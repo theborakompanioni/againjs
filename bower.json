@@ -18,6 +18,6 @@
   "dependencies": {
   },
   "devDependencies": {
-    "jasmine": "pivotal/jasmine#master"
+    "jasmine": "2.0.0"
   }
 }
