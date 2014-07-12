@@ -41,7 +41,7 @@
     "grunt-template-jasmine-istanbul": "0.3.0",
     "time-grunt": "~0.4.0",
     "karma": "~0.12.17",
-    "karma-jasmine": "~0.2.0",
+    "karma-jasmine": "~0.2.2",
     "karma-cli": "0.0.4",
     "karma-chrome-launcher": "~0.1.4",
     "karma-firefox-launcher": "~0.1.3",
