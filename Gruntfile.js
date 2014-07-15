@@ -1,6 +1,7 @@
+'use strict';
+var semver = require('semver');
 
 module.exports = function(grunt) {
-    'use strict';
 
     grunt.initConfig({
 
@@ -123,4 +124,34 @@ module.exports = function(grunt) {
     grunt.registerTask( 'test', ['karma', 'jasmine', 'coveralls']);
     grunt.registerTask( 'default', [ 'jshint', 'test', 'uglify', 'notify:js' ]);
 
+    grunt.registerTask('bump', 'Bump manifest version', function (type) {
+        var options = this.options({
+          bowerFile: 'bower.json',
+          pkgFile: grunt.config('pkgFile') || 'package.json'
+        });
+
+        function setup(file, type) {
+          var pkg = grunt.file.readJSON(file);
+          var newVersion = pkg.version = semver.inc(pkg.version, type || 'patch');
+          return {
+            file: file,
+            pkg: pkg,
+            newVersion: newVersion
+          };
+        }
+        var bowerConfig = setup(options.bowerFile, type);
+        grunt.file.write(
+          bowerConfig.file,
+          JSON.stringify(bowerConfig.pkg, null, '  ') + '\n'
+        );
+
+        var pkgConfig = setup(options.pkgFile, type);
+        grunt.file.write(
+          pkgConfig.file,
+          JSON.stringify(pkgConfig.pkg, null, '  ') + '\n'
+        );
+        grunt.config('pkg', pkgConfig.pkg);
+
+        grunt.log.ok('Version bumped to ' + pkgConfig.newVersion);
+    });
 };
