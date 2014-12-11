@@ -5,6 +5,7 @@ again.js
 [![Coverage Status](https://img.shields.io/coveralls/theborakompanioni/againjs.svg)](https://coveralls.io/r/theborakompanioni/againjs?branch=master)
 [![Dependency Status](http://img.shields.io/badge/dependencies-Vanilla_JS-brightgreen.svg)](http://vanilla-js.com/)
 [![devDependency Status](https://david-dm.org/theborakompanioni/againjs/dev-status.svg)](https://david-dm.org/theborakompanioni/againjs#info=devDependencies)
+[![Code Climate](https://codeclimate.com/github/theborakompanioni/againjs/badges/gpa.svg)](https://codeclimate.com/github/theborakompanioni/againjs)
 
 A "poll-me-maybe" JavaScript library
 
@@ -60,6 +61,8 @@ setTimeout(function() {
 ...
 ```
 
-### License
+License
+-------
 
-MIT License
+The project is licensed under the MIT license. See
+[LICENSE](https://github.com/theborakompanioni/againjs/blob/master/LICENSE) for details.
