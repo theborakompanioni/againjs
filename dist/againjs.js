@@ -1,27 +1,31 @@
-/*! { "name": "againjs", "version": "0.0.11", "homepage": "https://github.com/theborakompanioni/againjs","copyright": "(c) 2015 theborakompanioni" } */
+/*! { "name": "againjs", "version": "0.1.0", "homepage": "https://github.com/theborakompanioni/againjs","copyright": "(c) 2015 theborakompanioni" } */
 !function(window, factory) {
     "use strict";
     window.Again = factory();
-}(this, function() {
+}(this, function(undefined) {
     "use strict";
     function now() {
         return new Date().getTime();
     }
     function cancel(timer) {
-        clearInterval(timer.id), clearTimeout(timer.delay), delete timer.id, delete timer.delay;
+        clearInterval(timer.intervalId), clearTimeout(timer.delay), delete timer.intervalId, 
+        delete timer.delay;
     }
     function run(timer, interval, state, runNow) {
         var runner = function() {
             timer.last[state] = now(), timer.callback();
         };
-        if (timer.last = timer.last || {}, runNow) {
+        if (runNow) {
             var last = now() - timer.last[state];
-            interval > last ? timer.delay = setTimeout(function() {
-                runner(), timer.id = setInterval(runner, interval);
-            }, interval - last) : (setTimeout(function() {
+            if (interval > last) {
+                var delay = interval - last;
+                timer.delay = setTimeout(function() {
+                    runner(), timer.intervalId = setInterval(runner, interval);
+                }, delay);
+            } else setTimeout(function() {
                 runner();
-            }, 0), timer.id = setInterval(runner, interval));
-        } else timer.id = setInterval(runner, interval);
+            }, 0), timer.intervalId = setInterval(runner, interval);
+        } else timer.intervalId = setInterval(runner, interval);
     }
     function Again(config) {
         return this instanceof Again ? (this._state = null, this._timers = [], this._config = config || {}, 
@@ -37,8 +41,12 @@
             "*": parseFloat(stateIntervals)
         });
         var timer = {
+            name: (Math.random() + 1).toString(36).substring(3, 9),
             callback: callback,
-            intervals: intervals
+            intervals: intervals,
+            delay: undefined,
+            intervalId: undefined,
+            last: {}
         };
         this._timers.push(timer), this._run(timer, !!runNow);
         var me = this;

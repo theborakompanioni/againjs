@@ -8,7 +8,7 @@ module.exports = function (grunt) {
     dirs: {
       js: 'src',
       build: 'dist',
-      coverage: 'bin/coverage'
+      coverage: 'coverage'
     },
 
     pkg: grunt.file.readJSON('package.json'),

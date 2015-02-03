@@ -9,35 +9,36 @@
   }
 
   function cancel(timer) {
-    clearInterval(timer.id);
+    console.debug('Cancel timer %s', timer.name);
+    clearInterval(timer.intervalId);
     clearTimeout(timer.delay);
-    delete timer.id;
+    delete timer.intervalId;
     delete timer.delay;
   }
 
   function run(timer, interval, state, runNow) {
     var runner = function () {
+      console.debug('Executing timer %s', timer.name);
       timer.last[state] = now();
       timer.callback();
     };
 
-    timer.last = timer.last || {};
-
     if (!runNow) {
-      timer.id = setInterval(runner, interval);
+      timer.intervalId = setInterval(runner, interval);
     } else {
       var last = now() - timer.last[state];
-
       if (interval > last) {
+        var delay = interval - last;
+        console.debug('Scheduling timer %s in %i milliseconds', timer.name, delay);
         timer.delay = setTimeout(function () {
           runner();
-          timer.id = setInterval(runner, interval);
-        }, interval - last);
+          timer.intervalId = setInterval(runner, interval);
+        }, delay);
       } else {
         setTimeout(function () {
           runner();
         }, 0);
-        timer.id = setInterval(runner, interval);
+        timer.intervalId = setInterval(runner, interval);
       }
     }
   }
@@ -75,8 +76,12 @@
     }
 
     var timer = {
+      name: (Math.random() + 1).toString(36).substring(3, 9),
       callback: callback,
-      intervals: intervals
+      intervals: intervals,
+      delay: undefined,
+      intervalId: undefined,
+      last: {}
     };
 
     this._timers.push(timer);
@@ -90,7 +95,7 @@
       if (index > -1) {
         cancel(me._timers[index]);
 
-        console.debug('Unregistering timer on index %i', index);
+        console.debug('Unregistering timer %s', timer.name);
 
         me._timers.splice(index, 1);
 

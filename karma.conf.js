@@ -34,7 +34,7 @@ module.exports = function (config) {
 
     // Start these browsers
     //browsers: ['PhantomJS', 'Chrome', 'Firefox', 'Opera'],
-    browsers: ['PhantomJS', 'Firefox'],
+    browsers: ['PhantomJS', 'Firefox', 'Chrome'],
 
     customLaunchers: {
       Chrome_without_security: {

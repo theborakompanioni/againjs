@@ -5,7 +5,7 @@
     "./dist/againjs.min.js"
   ],
   "ignore": [
-    "bin",
+    "coverage",
     "spec",
     "bower_components",
     "node_modules",
